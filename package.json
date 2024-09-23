@@ -5,21 +5,28 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "webpack"
+    "start:dev": "webpack serve --config config/webpack.js --mode development",
+    "build": "webpack -c config/webpack.js"
   },
   "author": "shelep olha",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "cypress": "^13.14.2",
     "eslint": "^9.10.0",
+    "html-webpack-plugin": "^5.6.0",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "storybook": "^8.3.0",
