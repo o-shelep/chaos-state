@@ -6,7 +6,6 @@ const basicConfig = {
     path: path.resolve(__dirname, "../dist"),
     filename: "bundle.js",
   },
-  mode: "development",
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../templates/index.html"),
@@ -15,14 +14,13 @@ const basicConfig = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-      {
         test: /\.(js|jsx)$/i,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
         },
       },
     ],
@@ -34,7 +32,10 @@ const basicConfig = {
     },
   },
   devServer: {
-    port: 4000,
+    port: 3000,
+    hot: true,
+    liveReload: true,
+    open: true,
   },
 };
 
