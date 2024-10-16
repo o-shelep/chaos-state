@@ -1,50 +1,56 @@
 const { merge } = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const basicConfig = require('./webpack.config');
 
 const config = {
     mode: 'development',
+    devtool: 'source-map',
     module: {
         rules: [
             {
-                test: /\.css$/i,
+                test: /\.scss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
+                            sourceMap: true,
                             modules: {
                                 mode: 'local',
                                 localIdentName: `[name]_[local]--[hash:base64:5]`,
                                 namedExport: false,
                             },
+                        },
+                    },
+                    {
+                        loader: 'resolve-url-loader',
+                        options: {
+                            sourceMap: true,
+                        },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
                         },
                     },
                 ],
             },
             {
-                test: /\.scss$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                mode: 'local',
-                                localIdentName: `[name]_[local]--[hash:base64:5]`,
-                                namedExport: false,
-                            },
-                        },
-                    },
-                    'sass-loader',
-                ],
+                test: /\.(ico|png|jpg|jpeg|svg)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/[name][ext]',
+                },
             },
         ],
     },
+    output: {
+        assetModuleFilename: 'assets/[name][ext]',
+    },
     plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css',
+        new HtmlWebPackPlugin({
+            template: path.resolve(__dirname, '../public/index.html'),
+            favicon: path.resolve(__dirname, '../public/favicon.ico'),
         }),
     ],
 };
