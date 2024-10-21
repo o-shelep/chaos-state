@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge');
 const basicConfig = require('./webpack.config');
-
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require('path');
 const config = {
     mode: 'development',
     devtool: 'source-map',
@@ -50,7 +51,6 @@ const config = {
     plugins: [
         new HtmlWebPackPlugin({
             template: path.resolve(__dirname, '../public/index.html'),
-            favicon: path.resolve(__dirname, '../public/favicon.ico'),
         }),
     ],
 };

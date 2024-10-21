@@ -10,7 +10,6 @@ const basicConfig = {
     plugins: [
         new HtmlWebPackPlugin({
             template: path.resolve(__dirname, '../public/index.html'),
-            favicon: path.resolve(__dirname, '../public/favicon.ico'), // This ensures the favicon is injected
         }),
     ],
     module: {
@@ -33,12 +32,9 @@ const basicConfig = {
         extensions: ['.js', '.jsx'],
     },
     devServer: {
-        static: {
-            directory: path.resolve(__dirname, '../public'),
-        },
         compress: true,
         port: 9000,
     },
 };
-
+const a = 0;
 module.exports = basicConfig;

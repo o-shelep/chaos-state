@@ -11,7 +11,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:open": "cypress open",
     "test:ct": "cypress run --component --browser chrome",
-    "prepare": "husky"
+    "precommit": "husky run -c .husky/pre-commit",
+    "lint": "eslint **/*.{js,jsx} --ignore-pattern 'node_modules/' --ignore-pattern 'dist/'"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --ignore-path .gitignore --fix --max-warnings 0",
+      "prettier --write"
+    ]
   },
   "author": "shelep olha",
   "license": "ISC",
@@ -27,14 +34,24 @@
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
     "@cypress/code-coverage": "^3.13.2",
+    "@eslint/js": "^9.13.0",
     "@istanbuljs/nyc-config-babel": "^3.0.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "babel-loader": "^9.2.1",
     "babel-plugin-istanbul": "^7.0.0",
     "css-loader": "^7.1.2",
     "cypress": "13.14.2",
-    "eslint": "9.10.0",
-    "html-webpack-plugin": "5.6.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-cypress": "^4.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.1",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unicorn": "^56.0.0",
+    "globals": "^15.11.0",
+    "html-webpack-plugin": "^5.6.0",
     "husky": "^9.1.6",
     "lint-staged": "15.2.10",
     "mini-css-extract-plugin": "^2.9.1",
