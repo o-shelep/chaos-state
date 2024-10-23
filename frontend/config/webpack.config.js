@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const basicConfig = {
@@ -33,8 +33,7 @@ const basicConfig = {
     },
     devServer: {
         compress: true,
-        port: 9000,
+        port: 3000,
     },
 };
-const a = 0;
 module.exports = basicConfig;

@@ -1,24 +1,13 @@
-import React , {useState, useEffect} from 'react';
-import Header from "./components/Header/Header";
-import styles from'./App.module.scss';
+import React from 'react';
+
+import styles from './App.module.css';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []);
-
-  return (
-      <div className={styles.appContainer}>
-       <Header isLoggedIn={isLoggedIn}/>
-      </div>
-  );
+    return (
+        <div className={styles.appContainer}>
+            <h1>hello world</h1>
+        </div>
+    );
 };
 
 export default App;
