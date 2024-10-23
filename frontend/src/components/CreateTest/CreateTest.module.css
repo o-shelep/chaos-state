@@ -1,0 +1,107 @@
+.createTestForm {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.createTestForm h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.testInfo label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.testInfo label input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.testInfo label textarea {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.questionInfo {
+    margin-bottom: 20px;
+}
+
+.questionInfo label {
+    display: flex;
+    flex-direction: column;
+}
+
+.questionInfo label input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--main-blue);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    background-color: #e7f0ff;
+    gap: 0.7rem;
+}
+
+.questionContainer h4 {
+    font-size: 18px;
+}
+
+.questionContainer input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.createTestBtn {
+    padding: 10px;
+    background-color: var(--main-blue);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.createTestBtn:hover {
+    background-color: #0056b3;
+}
+
+.resultContainer label {
+    display: flex;
+    flex-direction: column;
+}
+
+.resultContainer label input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+}

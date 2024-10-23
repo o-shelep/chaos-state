@@ -1,0 +1,80 @@
+.footer {
+    border-top: 0.1rem solid var(--main-blue);
+    box-shadow: 0 0 20px rgba(135, 199, 255, 0.8);
+    padding: 60px 7% 50px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+    gap: 3.5rem;
+    background: white;
+    height: 30vh;
+}
+
+.footerContent .logo p {
+    font-weight: 800;
+    font-size: x-large;
+    text-decoration: none;
+    display: inline-block;
+    color: var(--main-blue);
+}
+
+.footerContent .logo p .firstLetter {
+    color: var(--pink);
+}
+
+.footerContent .logo p .thin {
+    color: var(--yellow);
+}
+
+.footerContent .logo p .lastLetter {
+    color: var(--green);
+}
+
+.footerContent .logo p:hover {
+    letter-spacing: 0.2rem;
+}
+
+.footerContent h4 {
+    color: var(--main-blue);
+    margin-bottom: 1.5rem;
+    font-size: 20px;
+    text-transform: lowercase;
+}
+
+.footerContent li {
+    margin-bottom: 16px;
+    list-style: none;
+}
+
+.footerContent li a {
+    display: block;
+    color: var(--main-blue);
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.4s ease;
+}
+
+.footerContent li a:hover {
+    transform: translateY(-5px);
+    text-decoration: underline;
+}
+
+.footerContent p {
+    color: var(--main-blue);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 30px;
+    margin: 20px 0;
+}
+
+.footerIcons a {
+    display: inline-block;
+    font-size: 36px;
+    margin-right: 17px;
+    transition: all 0.4s ease;
+}
+
+.footerIcons a:hover {
+    transform: translateY(-5px);
+}
