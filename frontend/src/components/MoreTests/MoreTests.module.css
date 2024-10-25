@@ -18,7 +18,7 @@
     margin: 0;
     width: 30%;
     height: 45vh;
-    background-color: #f9f9f9;
+    background-color: rgba(0, 0, 0, 0.598);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -36,9 +36,13 @@
 
 .testName {
     font-size: 18px;
+    color: #fff;
+    text-transform: lowercase;
 }
 
 .testDescription {
+    color: #fff;
+    text-transform: lowercase;
     padding-top: 2rem;
     text-transform: lowercase;
     font-size: 14px;
@@ -48,19 +52,19 @@
 
 .testBtn {
     cursor: pointer;
+    color: #fff;
+    text-decoration: none;
     background-color: var(--main-blue);
     padding: 0.5rem;
-    border: 1px solid transparent;
-    margin-top: auto;
     border-radius: 12px;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 16px;
     text-transform: lowercase;
+    margin-top: 4rem;
 }
 
 .testBtn:hover {
     background-color: var(--pink);
-    opacity: 0.8;
 }
 
 .paginationControls {
@@ -76,9 +80,11 @@
     border-radius: 8px;
     background-color: var(--main-blue);
     color: white;
-    font-weight: bold;
+    font-weight: 600;
 }
-
+.span {
+    color: #fff;
+}
 .arrowButton:disabled {
     background-color: gray;
     cursor: not-allowed;
@@ -86,5 +92,4 @@
 
 .arrowButton:hover:not(:disabled) {
     background-color: var(--pink);
-    opacity: 0.8;
 }

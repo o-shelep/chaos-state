@@ -1,5 +1,5 @@
 import React from "react";
-import ResultImage from "../../../assets/result.jpg"; // Renamed import to avoid conflict
+import ResultImage from "../../../assets/result.jpg"; 
 import styles from './Result.module.css';
 
 const LOADING_MESSAGE = "Завантаження результатів...";
@@ -16,11 +16,9 @@ function Result() {
         <p className={styles.resultText}>{LOADING_MESSAGE}</p>
       </div>
       <div className={styles.actionsContainer}>
-        <a href="/" className={styles.homeLink}>{HOME_LINK_TEXT}</a>
-        <span>або</span>
-        <a href="/auth/signin" className={styles.signupLink}>
-          <span>{SIGNUP_LINK_TEXT}</span> {CONTINUE_TEXT}
-        </a>
+        <p className={styles.homeLink}>ви можете повернутись додому або <a href="/auth/signin" className={styles.signupLink}>
+          <span>{SIGNUP_LINK_TEXT}</span>
+        </a> і продовжити</p>
       </div>
       <div className={styles.imageContainer}>
         <img src={ResultImage} alt="Result Illustration" />

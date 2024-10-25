@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.598);
     border-radius: 12px;
 }
 
@@ -45,14 +45,15 @@
 }
 
 .testBlock .answers button {
+    font-weight: 600;
+    color: #fff;
     margin-bottom: 1rem;
     width: 100%;
     padding: 1rem;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.598);
     border: 2px solid var(--main-blue);
     border-radius: 12px;
     font-size: 1rem;
-    font-weight: 500;
     cursor: pointer;
     transition:
         background-color 0.3s ease,
@@ -98,7 +99,7 @@
 }
 
 .btnContainer .previousBtn button:hover {
-    background-color: #eb90d7;
+    background-color: var(--green);
     transform: translateY(-2px);
 }
 
@@ -117,6 +118,6 @@
 }
 
 .btnContainer .submitBtn button:hover {
-    background-color: #003366;
+    background-color: var(--pink);
     transform: translateY(-2px);
 }

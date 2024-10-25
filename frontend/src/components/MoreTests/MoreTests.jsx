@@ -8,7 +8,6 @@ const TESTS = [
     { id: "4", name: "Test 4", description: "Description for Test 4" },
     { id: "5", name: "Test 5", description: "Description for Test 5" },
     { id: "6", name: "Test 6", description: "Description for Test 6" },
-    // Add more tests as needed
 ];
 
 const TESTS_PER_PAGE = 3;
@@ -59,7 +58,7 @@ function MoreTests() {
                 >
                     &lt; Previous
                 </button>
-                <span>{currentPage + 1} of {totalPages}</span>
+                <span className={styles.span}>{currentPage + 1} of {totalPages}</span>
                 <button 
                     className={styles.arrowButton} 
                     onClick={handleNextPage} 

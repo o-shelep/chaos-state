@@ -1,24 +1,10 @@
 .nav {
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.598);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 0.1rem solid var(--main-blue);
     padding: 1.5rem 6rem;
     margin-bottom: 2rem;
-    box-shadow: 0 0 20px rgba(135, 199, 255, 0.8);
-}
-
-@media (max-width: 860px) {
-    .nav {
-        padding: 1.5rem 3rem;
-    }
-}
-
-@media (max-width: 742px) {
-    .nav {
-        padding: 1.5rem 1.5rem;
-    }
 }
 
 .logoContainer {
@@ -32,25 +18,6 @@
     text-decoration: none;
     display: inline-block;
     color: var(--main-blue);
-}
-
-@media (max-width: 860px) {
-    .logo p {
-        font-size: 22px;
-    }
-}
-
-@media (max-width: 742px) {
-    .logo p {
-        font-size: 22px;
-        margin-right: 1rem;
-    }
-}
-
-@media (max-width: 610px) {
-    .logo p {
-        margin-bottom: 12px;
-    }
 }
 
 .firstLetter {
@@ -80,58 +47,13 @@
     flex-direction: row;
 }
 
-@media (max-width: 860px) {
-    .links {
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 742px) {
-    .links {
-        gap: 1rem;
-        text-align: center;
-    }
-}
-
 .links li a {
-    color: #333;
+    color: #fff;
     text-decoration: none;
     font-weight: 800;
     font-size: 20px;
 }
 
-@media (max-width: 742px) {
-    .links li a {
-        font-size: 18px;
-    }
-}
-
-@media (max-width: 610px) {
-    .links li a {
-        font-size: 18px;
-        font-weight: 600;
-    }
-}
-
 .links li a:hover {
-    color: #6666669a;
-}
-
-.links li button {
-    background: none;
-    border: none;
-    font-size: 26px;
-    cursor: pointer;
-    color: #c8c8c8;
-    transition: color 0.3s ease;
-}
-
-.links li button:hover {
-    color: var(--main-blue);
-}
-
-@media (max-width: 630px) {
-    .links li button {
-        margin-top: 5px;
-    }
+    text-decoration: underline;
 }

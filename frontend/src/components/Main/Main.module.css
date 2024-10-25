@@ -17,8 +17,8 @@
 }
 
 .imageWrapper img {
-    box-shadow: 0 0 20px rgba(135, 199, 255, 0.8);
-    border: 0.1rem solid white;
+    box-shadow: 0 0 20px #00000089;
+    border-color: #666;
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
@@ -26,6 +26,7 @@
 }
 
 .titleWrapper {
+    text-transform: lowercase;
     padding-top: 2rem;
     margin-left: 2rem;
     text-align: end;
@@ -45,6 +46,7 @@
 }
 
 .titleWrapper .descriptionWrapper {
+    text-transform: lowercase;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -63,11 +65,14 @@
 .titleWrapper .descriptionWrapper .buttonWrapper {
     margin-top: 2rem;
     background-color: var(--main-blue);
-    border: 0.1rem solid var(--border-blue);
     border-radius: 12px;
     padding: 0.7rem 2rem;
     display: inline-block;
     box-shadow: none;
+    transition: background-color 0.2s;
+}
+.titleWrapper .descriptionWrapper .buttonWrapper:hover {
+    background-color: var(--pink);
 }
 
 .titleWrapper .descriptionWrapper .buttonWrapper .testButton {
@@ -79,133 +84,4 @@
     cursor: pointer;
     border: none;
     outline: none;
-}
-
-/* Media Queries */
-
-@media screen and (max-width: 375px) {
-    .mainContainer {
-        flex-direction: column;
-        align-items: center;
-    }
-    .imageWrapper {
-        width: 100%;
-        margin: 1rem 0;
-    }
-    .titleWrapper {
-        margin-left: 0;
-        text-align: center;
-    }
-    .titleWrapper .mainTitle {
-        font-size: 2.4rem;
-    }
-    .titleWrapper .descriptionWrapper .descriptionText {
-        font-size: 1.2rem;
-    }
-    .titleWrapper .descriptionWrapper .buttonWrapper {
-        padding: 0.5rem 1rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .mainContainer {
-        flex-direction: column;
-        align-items: center;
-    }
-    .imageWrapper {
-        width: 100%;
-        margin: 0;
-    }
-    .titleWrapper {
-        margin: 0;
-        text-align: center;
-    }
-    .titleWrapper .mainTitle {
-        padding-bottom: 0;
-        font-size: 2.6rem;
-    }
-    .titleWrapper .descriptionWrapper .descriptionText {
-        font-size: 1.3rem;
-    }
-}
-
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    .mainContainer {
-        flex-direction: column;
-        align-items: center;
-    }
-    .imageWrapper {
-        width: 90%;
-    }
-    .titleWrapper .mainTitle {
-        font-size: 3rem;
-    }
-    .titleWrapper .descriptionWrapper .descriptionText {
-        font-size: 1.5rem;
-    }
-}
-
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    .mainContainer {
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-    .imageWrapper {
-        width: 45%;
-        height: 1000px;
-        margin-right: 1rem;
-    }
-    .titleWrapper .mainTitle {
-        font-size: 2rem;
-        margin: 0;
-    }
-    .titleWrapper .descriptionWrapper .descriptionText {
-        margin: 0;
-        font-size: 1rem;
-    }
-}
-
-@media screen and (min-width: 1025px) and (max-width: 1280px) {
-    .mainContainer {
-        .imageWrapper {
-            width: 50%;
-            height: 900px;
-        }
-        .titleWrapper .mainTitle {
-            font-size: 3.2rem;
-            margin: 0;
-        }
-        .titleWrapper .descriptionWrapper .descriptionText {
-            margin: 0;
-            font-size: 1.6rem;
-        }
-    }
-}
-
-@media screen and (min-width: 1281px) and (max-width: 1440px) {
-    .mainContainer {
-        .imageWrapper {
-            width: 50%;
-        }
-        .titleWrapper .mainTitle {
-            font-size: 3.6rem;
-        }
-        .titleWrapper .descriptionWrapper .descriptionText {
-            font-size: 1.9rem;
-        }
-    }
-}
-
-@media screen and (min-width: 1441px) {
-    .mainContainer {
-        .imageWrapper {
-            width: 30%;
-        }
-        .titleWrapper .mainTitle {
-            font-size: 3.6rem;
-        }
-        .titleWrapper .descriptionWrapper .descriptionText {
-            font-size: large;
-        }
-    }
 }

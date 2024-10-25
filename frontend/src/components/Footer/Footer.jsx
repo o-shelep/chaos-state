@@ -8,27 +8,13 @@ function Footer() {
         <div className={styles.logo}>
           <a href="/">
             <p>
-              c<span className={styles.firstLetter}>h</span>a
+               c<span className={styles.firstLetter}>h</span>a
               <span className={styles.thin}>o</span>
               <span className={styles.lastLetter}>s</span>
             </p>
           </a>
         </div>
         <p className={styles.footerRights}>all rights reserved | shelep olha</p>
-        <div className={styles.footerIcons}>
-          <a href="https://www.facebook.com/profile.php?id=100081349838351">
-            <i className="bx bxl-facebook-square"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/olha-shelep-a25546318">
-            <i className="bx bxl-linkedin-square"></i>
-          </a>
-          <a href="/">
-            <i className="bx bxl-paypal"></i>
-          </a>
-          <a href="https://github.com/shelep-olya">
-            <i className="bx bxl-github"></i>
-          </a>
-        </div>
       </div>
 
       <div className={styles.footerContent}>

@@ -9,8 +9,9 @@
 
 .resultsTitle {
     font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0 1rem 1.5rem 1rem;
     color: var(--main-blue);
+    text-transform: lowercase;
 }
 
 .resultsContent {
@@ -22,8 +23,9 @@
 }
 
 .resultText {
-    font-size: 1.75rem;
-    font-weight: 800;
+    text-transform: lowercase;
+    font-size: 24px;
+    font-weight: 600;
     padding: 1.5rem;
 }
 
@@ -33,24 +35,26 @@
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 2rem;
-    font-size: 1.25rem;
-    white-space: nowrap;
+    font-size: 22px;
 }
 
 .homeLink {
-    font-size: 1.25rem;
-    color: white;
+    color: #fff;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.homeLink:hover {
+.homeLink a {
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+}
+
+.homeLink a:hover {
     text-decoration: underline;
 }
 
 .signupLink {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 22px;
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -74,9 +78,10 @@
 }
 
 .imageContainer img {
-    border: 2px solid var(--main-blue);
     border-radius: 12px;
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
+    box-shadow: 0 0 20px #00000089;
+    border-color: #666;
 }

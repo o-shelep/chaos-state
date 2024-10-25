@@ -26,9 +26,10 @@ body {
     color: var(--border-blue);
     background-image: radial-gradient(
         circle,
-        rgba(59, 156, 151, 0.753),
-        rgba(196, 184, 80, 0.765),
-        rgba(93, 155, 76, 0.735),
-        rgba(158, 74, 115, 0.783)
+        rgba(59, 156, 151, 0.479),
+        rgba(196, 184, 80, 0.477),
+        rgba(93, 155, 76, 0.434),
+        rgba(158, 74, 115, 0.491)
     );
+    background-color: rgba(0, 0, 0, 0.81);
 }

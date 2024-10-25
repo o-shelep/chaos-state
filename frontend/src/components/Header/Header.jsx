@@ -1,5 +1,4 @@
 import React from "react";
-import { BsSun } from "react-icons/bs";
 import styles from './Header.module.css';
 
 const Header = () => {
@@ -24,9 +23,6 @@ const Header = () => {
           </li>
           <li>
             <a href="/tests/66f586bec76785b1bfc0d33b">тест</a>
-          </li>
-          <li>
-            <button>  <BsSun /></button>
           </li>
         </ul>
       </div>
