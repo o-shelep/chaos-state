@@ -1,8 +1,15 @@
 import React from 'react';
 import styles from "./Main.module.css";
 import TestImage from "../../../assets/main.jpg";
+import {useNavigate} from 'react-router-dom';
 
 function Main() {
+  const navigate = useNavigate();
+
+  const handleTestButtonClick = () => {
+    const testId = '66f586bec76785b1bfc0d33b'; 
+    navigate(`/tests/${testId}`);  
+  };
   return (
     <div className={styles.mainContainer}>
       <div className={styles.imageWrapper}>
@@ -16,7 +23,7 @@ function Main() {
             Цей тест не є підставою для звернення до психолога і був створений виключно з метою витрати вашого дорогоцінного часу на непотрібну херню, яка нічого вам не дасть. Крім того, після проходження тесту для вас відкриється можливість реєстрації з метою подальшого створення таких же тупих тестів.
           </p>
           <div className={styles.buttonWrapper}>
-            <button className={styles.testButton}>тест</button>
+            <button className={styles.testButton} onClick={handleTestButtonClick}>тест</button>
           </div>
         </div>
       </div>
