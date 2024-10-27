@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
+
 import ResultImage from "../../../assets/result.jpg"; 
 import styles from './Result.module.css';
 

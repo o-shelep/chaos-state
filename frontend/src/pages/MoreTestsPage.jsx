@@ -1,20 +1,12 @@
-import React, {useEffect,useState} from 'react';
+import React from 'react';
 
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import MoreTests from '../components/MoreTests/MoreTests';
+import useAuthStatus from '../hooks/useAuthStatus';
 
 function MoreTestsPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if(token){
-      setIsLoggedIn(true);
-    }else{
-      setIsLoggedIn(false);
-    }
-  }, []);
+  const isLoggedIn = useAuthStatus();
 
   return (
     <>

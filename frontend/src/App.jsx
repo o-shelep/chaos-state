@@ -11,11 +11,9 @@ import NotFoundPage from './pages/NotFoundPage';
 import RegisterPage from './pages/RegisterPage';
 import ResultPage from './pages/ResultPage';
 import TestPage from './pages/TestPage';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 const App = () => {
-
-
   return (
    <UserProvider>
       <div className={styles.appContainer}>
