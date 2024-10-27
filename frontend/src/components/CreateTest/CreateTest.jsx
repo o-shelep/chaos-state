@@ -1,128 +1,115 @@
-import React, { useState } from "react";
-import styles from "./CreateTest.module.css";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
+import { jwtDecode } from "jwt-decode"; 
+import styles from "./CreateTest.module.css"; 
 
 function CreateTest() {
-  const [stage, setStage] = useState(1); 
   const [testName, setTestName] = useState("");
   const [description, setDescription] = useState("");
   const [numQuestions, setNumQuestions] = useState(0);
   const [numResults, setNumResults] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [results, setResults] = useState([]);
-  const [errors, setErrors] = useState({}); 
+  const [authorId, setAuthorId] = useState(null);
+  const [currentStep, setCurrentStep] = useState(1); 
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const token = localStorage.getItem("token"); 
+    if (token) {
+      const decodedToken = jwtDecode(token); 
+      setAuthorId(decodedToken._id); 
+    }
+  }, []);
 
   const handleTestInfoChange = (e) => {
     const { name, value } = e.target;
-    if (name === "testName") setTestName(value);
-    else if (name === "description") setDescription(value);
+    if (name === "testName") {
+      setTestName(value);
+    } else if (name === "description") {
+      setDescription(value);
+    }
   };
 
   const handleQuestionInfoChange = (e) => {
     const { name, value } = e.target;
     if (name === "numQuestions") {
       setNumQuestions(Number(value));
-      setQuestions(Array(Number(value)).fill({}));
+      setQuestions(Array.from({ length: Number(value) }, () => ({}))); 
     } else if (name === "numResults") {
       setNumResults(Number(value));
-      setResults(Array(Number(value)).fill(""));
+      setResults(Array(Number(value)).fill("")); 
     }
   };
-
-const validateFields = () => {
-  let newErrors = {};
-
-  if (stage === 1) {
-    if (!testName.trim()) newErrors.testName = "назва тесту обов'язкова";
-    if (!description.trim()) newErrors.description = "опис тесту обов'язковий";
-  } else if (stage === 2) {
-    if (numQuestions <= 0) newErrors.numQuestions = "мінімум 1 запитання";
-    if (numResults <= 1) newErrors.numResults = "мінімум 2 відповіді";
-  } else if (stage >= 3 && stage < 3 + numQuestions) {
-    const currentQuestion = questions[stage - 3];
-    if (!currentQuestion?.question?.trim()) {
-      newErrors[`question${stage - 3}`] = "запитання обов'язкове";
-    }
-    if (
-      !currentQuestion?.answer1?.trim() ||
-      !currentQuestion?.answer2?.trim() ||
-      !currentQuestion?.answer3?.trim() 
-    ) {
-      newErrors[`answers${stage - 3}`] = "усі 3 відповіді обов'язкові";
-    }
-  }
-
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0; 
-};
-
-
-  const handleNext = () => {
-    if (validateFields()) setStage(stage + 1); 
-  };
-
-  const handleBack = () => setStage(stage - 1);
 
   const handleQuestionChange = (index, field, value) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[index] = { ...updatedQuestions[index], [field]: value };
+    updatedQuestions[index][field] = value;
     setQuestions(updatedQuestions);
   };
 
-  const renderQuestionForm = (currentQuestionIndex) => (
-    <div key={currentQuestionIndex} className={styles.questionContainer}>
-      <h4>Запитання {currentQuestionIndex + 1}</h4>
-      <input
-        type="text"
-        placeholder="Запитання"
-        onChange={(e) =>
-          handleQuestionChange(currentQuestionIndex, "question", e.target.value)
-        }
-      />
-      {errors[`question${currentQuestionIndex}`] && (
-        <p className={styles.error}>{errors[`question${currentQuestionIndex}`]}</p>
-      )}
-      <input
-        type="text"
-        placeholder="Відповідь 1"
-        required
-        onChange={(e) =>
-          handleQuestionChange(currentQuestionIndex, "answer1", e.target.value)
-        }
-      />
-      <input
-        type="text"
-        placeholder="Відповідь 2"
-        required
-        onChange={(e) =>
-          handleQuestionChange(currentQuestionIndex, "answer2", e.target.value)
-        }
-      />
-      <input
-        type="text"
-        placeholder="Відповідь 3"
-        required
-        onChange={(e) =>
-          handleQuestionChange(currentQuestionIndex, "answer3", e.target.value)
-        }
-      />
-      {errors[`answers${currentQuestionIndex}`] && (
-        <p className={styles.error}>{errors[`answers${currentQuestionIndex}`]}</p>
-      )}
-      <div className={styles.buttonGroup}>
-        {stage > 1 && <button type="button" onClick={handleBack} className={styles.prevBtn}>назад</button>}
-        <button type="button" onClick={handleNext} className={styles.nextBtn}>далі</button>
-      </div>
-    </div>
-  );
+  const handleResultChange = (index, value) => {
+    const updatedResults = [...results];
+    updatedResults[index] = value;
+    setResults(updatedResults);
+  };
+
+  const handleNextStep = () => {
+    setCurrentStep((prevStep) => prevStep + 1);
+  };
+
+  const handleBackStep = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const testData = {
+      name: testName,
+      description,
+      numberOfQuestions: numQuestions,
+      numberOfResults: numResults,
+      testBlocks: questions.map((q) => ({
+        question: q.question,
+        answers: [q.answer1, q.answer2, q.answer3],
+      })), 
+      author: authorId, 
+      results, 
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/tests", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`, 
+        },
+        body: JSON.stringify(testData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log("Test created successfully:", data);
+      
+      navigate("/me");
+      
+    } catch (error) {
+      console.error("Error creating test:", error);
+    }
+  };
 
   return (
-    <form className={styles.createTestForm}>
-      <h2>Створити тест</h2>
+    <form onSubmit={handleSubmit} className={styles.createTestForm}>
 
-      {stage === 1 && (
+      {currentStep === 1 && (
         <div className={styles.testInfo}>
+          <h2>створити тест</h2>
           <label>
-            Назва тесту:
+            назва тесту:
             <input
               type="text"
               name="testName"
@@ -130,28 +117,24 @@ const validateFields = () => {
               onChange={handleTestInfoChange}
               required
             />
-            {errors.testName && <p className={styles.error}>{errors.testName}</p>}
           </label>
           <label>
-            Опис тесту:
+            опис тесту:
             <textarea
               name="description"
               value={description}
               onChange={handleTestInfoChange}
               required
             />
-            {errors.description && <p className={styles.error}>{errors.description}</p>}
           </label>
-          <div className={styles.buttonGroup}>
-            <button type="button" onClick={handleNext}>Далі</button>
-          </div>
+          <button type="button" onClick={handleNextStep} className={styles.nextInfoBtn}>далі</button>
         </div>
       )}
 
-      {stage === 2 && (
+      {currentStep === 2 && (
         <div className={styles.questionInfo}>
           <label>
-            Кількість запитань:
+            кількість запитань:
             <input
               type="number"
               name="numQuestions"
@@ -160,10 +143,9 @@ const validateFields = () => {
               required
               min="1"
             />
-            {errors.numQuestions && <p className={styles.error}>{errors.numQuestions}</p>}
           </label>
           <label>
-            Кількість відповідей:
+            кількість відповідей:
             <input
               type="number"
               name="numResults"
@@ -172,37 +154,72 @@ const validateFields = () => {
               required
               min="2"
             />
-            {errors.numResults && <p className={styles.error}>{errors.numResults}</p>}
           </label>
-          <div className={styles.buttonGroup}>
-            {stage > 1 && <button type="button" onClick={handleBack} className={styles.prevBtn}>Назад</button>}
-            <button type="button" onClick={handleNext}  className={styles.nextBtn}>Далі</button>
-          </div>
+          <button type="button" onClick={handleBackStep} className={styles.prevBtn}>назад</button>
+          <button type="button" onClick={handleNextStep} className={styles.nextBtn}>далі</button>
         </div>
       )}
 
-      {stage >= 3 && stage < 3 + numQuestions && renderQuestionForm(stage - 3)}
+      {currentStep > 2 && currentStep <= 2 + numQuestions && (
+        <div className={styles.questionContainer}>
+          <h4>запитання {currentStep - 2}</h4>
+          <label>
+            <input
+              type="text"
+              placeholder="запитання"
+              onChange={(e) => handleQuestionChange(currentStep - 3, "question", e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              placeholder="відповідь 1"
+              onChange={(e) => handleQuestionChange(currentStep - 3, "answer1", e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              placeholder="відповідь 2"
+              onChange={(e) => handleQuestionChange(currentStep - 3, "answer2", e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              placeholder="відповідь 3"
+              onChange={(e) => handleQuestionChange(currentStep - 3, "answer3", e.target.value)}
+              required
+            />
+          </label>
+          <div className={styles.btnGroup}>
+              <button type="button" onClick={handleBackStep} className={styles.prevBtn}>назад</button>
+              <button type="button" onClick={handleNextStep} className={styles.nextBtn}>далі</button>
+          </div>
 
-      {stage === 3 + numQuestions && (
-        <div className={styles.results}>
-          {results.map((_, index) => (
-            <div key={index} className={styles.resultContainer}>
-              <label>
-                Відповідь {index + 1}:
-                <input
-                  type="text"
-                  value={results[index]}
-                  onChange={(e) => setResults(results.map((res, i) => (i === index ? e.target.value : res)))}
-                  required
-                />
-              </label>
-            </div>
+        </div>
+      )}
+
+      {currentStep === 2 + numQuestions + 1 && (
+        <div className={styles.resultContainer}>
+          <h3>результати</h3>
+          {Array.from({ length: numResults }, (_, index) => (
+            <label key={index}>
+              <input
+                type="text"
+                value={results[index]}
+                onChange={(e) => handleResultChange(index, e.target.value)}
+                required
+                placeholder="відповідь" 
+              />
+            </label>
           ))}
-          <div className={styles.buttonGroup}>
-            {stage > 1 && <button type="button" onClick={handleBack} className={styles.prevBtn}>Назад</button>}
-            <button type="submit" className={styles.createTestBtn}>
-              Створити
-            </button>
+          <div className={styles.btnGroup}>
+          <button type="button" onClick={handleBackStep} className={styles.prevResBtn}>назад</button>
+          <button type="submit" className={styles.nextResBtn}>завершити</button>
           </div>
         </div>
       )}

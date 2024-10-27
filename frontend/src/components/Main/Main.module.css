@@ -46,6 +46,7 @@
 }
 
 .titleWrapper .descriptionWrapper {
+    padding-right: 4rem;
     text-transform: lowercase;
     display: flex;
     flex-direction: column;
@@ -63,6 +64,7 @@
 }
 
 .titleWrapper .descriptionWrapper .buttonWrapper {
+    cursor: pointer;
     margin-top: 2rem;
     background-color: var(--main-blue);
     border-radius: 12px;

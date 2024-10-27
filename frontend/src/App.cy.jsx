@@ -1,7 +1,9 @@
-import React from 'react';
+import './App.module.css'; 
+
 import { mount } from 'cypress/react';
-import App from './App'; // Adjust the path to your App component
-import './App.module.css'; // Ensure the CSS is loaded correctly
+import React from 'react';
+
+import App from './App'; 
 
 describe('App Component', () => {
   it('renders the title correctly', () => {

@@ -1,6 +1,7 @@
-const path = require("path");
+const path = require("node:path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+
 const basicConfig = {
     entry: path.resolve(__dirname, "../src/index.js"),
     output: {
@@ -37,6 +38,12 @@ const basicConfig = {
     },
     devServer: {
         port: 3000,
+        historyApiFallback: true,
+        hot: true,
+        client: {
+            webSocketURL: "ws://localhost:3000/ws",
+        },
+        allowedHosts: "all",
     },
 };
 

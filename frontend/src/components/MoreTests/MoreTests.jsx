@@ -1,20 +1,47 @@
-import React, { useState } from "react";
-import styles from "./MoreTests.module.css";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./MoreTests.module.css"; 
 
-const TESTS = [
-    { id: "1", name: "Test 1", description: "Description for Test 1" },
-    { id: "2", name: "Test 2", description: "Description for Test 2" },
-    { id: "3", name: "Test 3", description: "Description for Test 3" },
-    { id: "4", name: "Test 4", description: "Description for Test 4" },
-    { id: "5", name: "Test 5", description: "Description for Test 5" },
-    { id: "6", name: "Test 6", description: "Description for Test 6" },
-];
-
-const TESTS_PER_PAGE = 3;
+const TESTS_PER_PAGE = 3; 
 
 function MoreTests() {
-    const [currentPage, setCurrentPage] = useState(0);
-    const totalPages = Math.ceil(TESTS.length / TESTS_PER_PAGE);
+    const [tests, setTests] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0); 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchTests = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const response = await fetch("http://localhost:5000/tests/more-tests", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Failed to fetch tests: ${response.status} ${errorText}`);
+                }
+
+                const data = await response.json();
+                setTests(data.data.tests);
+            } catch (err) {
+                console.error(err);
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchTests();
+    }, []);
+
+    const totalPages = Math.ceil(tests.length / TESTS_PER_PAGE); 
 
     const handleNextPage = () => {
         if (currentPage < totalPages - 1) {
@@ -28,28 +55,44 @@ function MoreTests() {
         }
     };
 
+    const handleTakeTest = (testId) => {
+        navigate(`/tests/${testId}`);
+    };
+
     const startIndex = currentPage * TESTS_PER_PAGE;
-    const displayedTests = TESTS.slice(startIndex, startIndex + TESTS_PER_PAGE);
+    const displayedTests = tests.slice(startIndex, startIndex + TESTS_PER_PAGE); 
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div className={styles.moreTestsContainer}>
             <div className={styles.testsRow}>
-                {displayedTests.map(test => (
-                    <div className={styles.testContainer} key={test.id}>
-                        <div className={styles.test}>
-                            <h3 className={styles.testName}>{test.name}</h3>
-                            <p className={styles.testDescription}>{test.description}</p>
-                            <a 
-                                href={`/tests/${test.id}`} 
-                                className={styles.testBtn}
-                            >
-                                Take this test
-                            </a>
+                {displayedTests.length > 0 ? (
+                    displayedTests.map((test) => (
+                        <div className={styles.testContainer} key={test._id}>
+                            <div className={styles.test}>
+                                <h3 className={styles.testName}>{test.name}</h3>
+                                <p className={styles.testDescription}>{test.description}</p>
+                                <button 
+                                    className={styles.testBtn}
+                                    onClick={() => handleTakeTest(test._id)} 
+                                >
+                                    Take this test
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    <p>No tests available</p>
+                )}
             </div>
-
+    
             <div className={styles.paginationControls}>
                 <button 
                     className={styles.arrowButton} 
@@ -58,7 +101,7 @@ function MoreTests() {
                 >
                     &lt; Previous
                 </button>
-                <span className={styles.span}>{currentPage + 1} of {totalPages}</span>
+                <span>{currentPage + 1} of {totalPages}</span>
                 <button 
                     className={styles.arrowButton} 
                     onClick={handleNextPage} 

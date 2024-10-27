@@ -1,7 +1,5 @@
 const { merge } = require("webpack-merge");
 const basicConfig = require("./webpack.config");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require("path");
 
 const config = {
     mode: "development",
@@ -45,6 +43,7 @@ const config = {
     devServer: {
         port: 3000,
         open: true,
+        historyApiFallback: true,
     },
 };
 

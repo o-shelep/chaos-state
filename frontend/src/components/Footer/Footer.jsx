@@ -7,7 +7,7 @@ function Footer() {
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
         <div className={styles.logo}>
-          <Link href="/">
+          <Link to="/">
             <p>
                c<span className={styles.firstLetter}>h</span>a
               <span className={styles.thin}>o</span>
@@ -21,18 +21,18 @@ function Footer() {
       <div className={styles.footerContent}>
         <h4>Know More</h4>
         <ul>
-          <li><Link href="tel:0 800 505 201">0 800 505 201 - Гаряча лінія МОЗ</Link></li>
-          <li><Link href="tel:0 800 60 20 19">0 800 60 20 19 - Контакт-центр МОЗ</Link></li>
-          <li><Link href="tel:0 800 501 701">0 800 501 701 - Всеукраїнський телефон довіри</Link></li>
+          <li><Link to="tel:0 800 505 201">0 800 505 201 - Гаряча лінія МОЗ</Link></li>
+          <li><Link to="tel:0 800 60 20 19">0 800 60 20 19 - Контакт-центр МОЗ</Link></li>
+          <li><Link to="tel:0 800 501 701">0 800 501 701 - Всеукраїнський телефон довіри</Link></li>
         </ul>
       </div>
 
       <div className={styles.footerContent}>
         <h4>Get Help</h4>
         <ul>
-          <li><Link href="https://mindlyspace.com/">Mindly Space</Link></li>
-          <li><Link href="https://www.rozmova.me/">Rozmova</Link></li>
-          <li><Link href="https://www.rozmova.me/tests">Tests</Link></li>
+          <li><Link to="https://mindlyspace.com/">Mindly Space</Link></li>
+          <li><Link to="https://www.rozmova.me/">Rozmova</Link></li>
+          <li><Link to="https://www.rozmova.me/tests">Tests</Link></li>
         </ul>
       </div>
     </footer>

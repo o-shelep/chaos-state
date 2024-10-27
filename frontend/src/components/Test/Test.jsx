@@ -1,35 +1,61 @@
-import React, { useState } from "react";
-import styles from "./Test.module.css";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import styles from "./Test.module.css"; // Adjust your styles as needed
 
 function Test() {
+    const { testId } = useParams();
+    const navigate = useNavigate();
+    const [testData, setTestData] = useState(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
 
-    const testData = {
-        testBlocks: [
-            {
-                question: "What is your favorite color?",
-                answers: ["Red", "Blue", "Green", "Yellow"],
-            },
-            {
-                question: "Which animal do you prefer?",
-                answers: ["Dog", "Cat", "Bird", "Fish"],
-            },
-            {
-                question: "What is your favorite season?",
-                answers: ["Winter", "Spring", "Summer", "Autumn"],
-            },
-        ],
-    };
+    useEffect(() => {
+        if (!testId) {
+            console.error("No test ID provided.");
+            return; // Exit early if testId is not defined
+        }
+
+        const fetchTestData = async () => {
+            try {
+                const token = localStorage.getItem('token'); // Retrieve the token from local storage
+                const response = await fetch(`http://localhost:5000/tests/${testId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`, // Include the token
+                    },
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Failed to fetch test data: ${response.status} ${errorText}`);
+                }
+
+                const { data } = await response.json();
+                setTestData(data.test);
+            } catch (error) {
+                console.error("Error fetching test data: ", error);
+                // Optionally redirect or show an error message
+            }
+        };
+
+        fetchTestData();
+    }, [testId]);
 
     const handleAnswerSelection = (index) => {
         setSelectedAnswerIndex(index);
     };
 
     const handleNextQuestion = () => {
-        if (selectedAnswerIndex !== null) {
+        if (selectedAnswerIndex === null) {
+            alert("Please select an answer before proceeding.");
+            return;
+        }
+        if (currentQuestionIndex < testData.testBlocks.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             setSelectedAnswerIndex(null);
+        } else {
+            navigate(`/results/${testId}`);
         }
     };
 
@@ -39,6 +65,10 @@ function Test() {
             setSelectedAnswerIndex(null);
         }
     };
+
+    if (!testData) {
+        return <div>Loading...</div>;
+    }
 
     const currentQuestion = testData.testBlocks[currentQuestionIndex];
 
