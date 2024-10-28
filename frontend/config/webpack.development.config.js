@@ -2,6 +2,7 @@ const { merge } = require("webpack-merge");
 const basicConfig = require("./webpack.config");
 const path = require("path");
 
+
 const config = {
     mode: "development",
     module: {
