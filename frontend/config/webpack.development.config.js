@@ -1,7 +1,5 @@
 const { merge } = require("webpack-merge");
 const basicConfig = require("./webpack.config");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require("path");
 
 const config = {
     mode: "development",
@@ -21,6 +19,7 @@ const config = {
                 test: /\.css$/i,
                 use: [
                     "style-loader",
+
                     {
                         loader: "css-loader",
                         options: {

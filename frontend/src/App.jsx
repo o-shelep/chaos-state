@@ -19,6 +19,7 @@ const App = () => {
        {/* <ResultPage/> DONE */}
       </div>
   );
+
 };
 
 export default App;
