@@ -4,31 +4,33 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "echo \"Please provide entry file\" && exit 1", 
-    "build": "webpack build -c config/webpack.production.config.js", 
-    "build:dev": "webpack build -c config/webpack.development.config.js", 
-    "start:dev": "webpack serve -c config/webpack.development.config.js", 
-    "test": "echo \"Error: no test specified\" && exit 1", 
-    "test:open": "cypress open", 
-    "test:ct": "cypress run --component --browser chrome", 
+    "start": "echo \"Please provide entry file\" && exit 1",
+    "build": "webpack build -c config/webpack.production.config.js",
+    "build:dev": "webpack build -c config/webpack.development.config.js",
+    "start:dev": "webpack serve -c config/webpack.development.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:open": "cypress open",
+    "test:ct": "cypress run --component --browser chrome",
     "lint": "eslint . --ignore-pattern 'node_modules/' --ignore-pattern 'dist/'", 
-    "prepare": "cd .. && husky frontend/.husky" 
-  }, 
+    "prepare": "cd .. && husky frontend/.husky"
+  },
+  "author": "shelep olha",
+  "license": "ISC",
+  "dependencies": {
+    "copy-webpack-plugin": "^12.0.2",
+    "husky": "^9.1.6",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "6.26.2",
+    "styled-components": "^6.1.13"
+  },
   "husky": { 
     "hooks": { 
       "pre-commit": "lint-staged" 
     } 
   },
-  "author": "shelep olha",
-  "license": "ISC",
-  "dependencies": {
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "react-router-dom": "6.26.2",
-    "styled-components": "6.1.13"
-  },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
+"@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
     "@cypress/code-coverage": "^3.13.2",

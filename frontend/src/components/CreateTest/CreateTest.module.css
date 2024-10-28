@@ -1,0 +1,121 @@
+.createTestForm {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 20px #00000089;
+    border-color: #666;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.598);
+}
+
+.createTestForm h2 {
+    color: var(--main-blue);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.testInfo label {
+    color: var(--main-blue);
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.testInfo label input {
+    padding: 8px;
+    border: 1px solid #555555;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.testInfo label textarea {
+    resize: vertical;
+    padding: 6px;
+    border: 1px solid #555555;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.questionInfo {
+    color: var(--main-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.questionInfo label {
+    display: flex;
+    flex-direction: column;
+}
+
+.questionInfo label input {
+    padding: 8px;
+    border: 1px solid #555555;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #555555;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    background-color: #e7f0ff72;
+    gap: 0.7rem;
+}
+
+.questionContainer h4 {
+    font-size: 18px;
+    color: #fff;
+}
+
+.questionContainer input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+.createTestBtn,
+.nextBtn,
+.prevBtn {
+    padding: 10px;
+    background-color: var(--main-blue);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: space-between;
+}
+.createTestBtn:hover {
+    background-color: var(--pink);
+}
+
+.resultContainer label {
+    color: var(--main-blue);
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+}
+
+.resultContainer label input {
+    padding: 8px;
+    border: 1px solid #555555;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+}

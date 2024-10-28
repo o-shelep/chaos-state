@@ -1,9 +1,8 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
+const domNode = document.getElementById("root");
 
-import App from './App';
-
-const domNode = document.querySelector('#root');
 const root = createRoot(domNode);
 
 root.render(<App />);
