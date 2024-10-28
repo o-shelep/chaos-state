@@ -1,6 +1,5 @@
 const { merge } = require("webpack-merge");
 const basicConfig = require("./webpack.config");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 const config = {
@@ -21,6 +20,7 @@ const config = {
                 test: /\.css$/i,
                 use: [
                     "style-loader",
+
                     {
                         loader: "css-loader",
                         options: {
@@ -42,9 +42,12 @@ const config = {
             },
         ],
     },
+    devtool: "inline-source-map",
     devServer: {
         port: 3000,
         open: true,
+        hot: true,
+        historyApiFallback: true,
     },
 };
 
