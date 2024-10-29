@@ -1,5 +1,9 @@
 const { merge } = require("webpack-merge");
 const basicConfig = require("./webpack.config");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const config = {
     mode: "development",
@@ -45,6 +49,13 @@ const config = {
         open: true,
         historyApiFallback: true,
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            "process.env": {
+                REACT_APP_API_URL: JSON.stringify(process.env.REACT_APP_API_URL),
+            },
+        }),
+    ],
 };
 
 module.exports = merge(basicConfig, config);

@@ -1,6 +1,6 @@
-import {useEffect,useState} from 'react';
+import { useEffect, useState } from "react";
 
-import { fetchUserData } from '../services/apiService';
+import { fetchUserData } from "../services/authService";
 
 const TESTS_PER_PAGE = 3;
 
@@ -10,15 +10,17 @@ function usePaginatedTests() {
     const totalPages = Math.ceil(tests.length / TESTS_PER_PAGE);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (token) {
-            fetchUserData(token).then((data) => {
-                if (data.status === 'success') {
-                    setTests(data.data.tests);
-                } else {
-                    console.error('Failed to fetch user data.');
-                }
-            }).catch(error => console.error(error));
+            fetchUserData(token)
+                .then((data) => {
+                    if (data.status === "success") {
+                        setTests(data.data.tests);
+                    } else {
+                        console.error("Failed to fetch user data.");
+                    }
+                })
+                .catch((error) => console.error(error));
         }
     }, []);
 
@@ -33,7 +35,6 @@ function usePaginatedTests() {
     };
 
     return { displayedTests, currentPage, totalPages, nextPage, previousPage };
-
 }
 
 export default usePaginatedTests;

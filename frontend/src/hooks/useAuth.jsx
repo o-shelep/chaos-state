@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { fetchUsername,signIn, signUp } from "../services/authService"; // adjust the path as necessary
+import { fetchUsername,signIn, signUp } from "../services/authService"; 
 
 const useAuth = () => {
     const [username, setUsername] = useState("");

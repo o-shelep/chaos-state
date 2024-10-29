@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 import  usePaginatedTests  from '../../hooks/usePaginatedTests';
-import { deleteUserAccount,signOutUser } from '../../services/apiService';
+import { deleteUserAccount,signOutUser } from '../../services/authService';
 import styles from "./Me.module.css";
 
 function Me() {
