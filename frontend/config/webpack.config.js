@@ -7,13 +7,11 @@ const basicConfig = {
     output: {
         path: path.resolve(__dirname, "../dist"),
         filename: "bundle.js",
+        publicPath: "/",
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "../public/index.html"),
-        }),
-        new CopyPlugin({
-            patterns: [{ from: path.resolve(__dirname, "../assets"), to: path.resolve(__dirname, "../dist/assets") }],
         }),
     ],
     module: {
@@ -37,6 +35,7 @@ const basicConfig = {
         },
     },
     devServer: {
+        compress: true,
         port: 3000,
         historyApiFallback: true,
         hot: true,
@@ -46,5 +45,4 @@ const basicConfig = {
         allowedHosts: "all",
     },
 };
-
 module.exports = basicConfig;

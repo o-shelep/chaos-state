@@ -1,4 +1,4 @@
-// https://eslint.org/docs/v8.x/
+// .eslintrc.js
 
 const config = {
     env: {
@@ -15,7 +15,6 @@ const config = {
         "plugin:unicorn/recommended",
         "plugin:cypress/recommended",
     ],
-    /* https://github.com/import-js/eslint-plugin-import */
     settings: {
         "import/resolver": {
             node: {

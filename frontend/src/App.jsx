@@ -32,6 +32,7 @@ const App = () => {
       </div>
    </UserProvider>
   );
+
 };
 
 export default App;
