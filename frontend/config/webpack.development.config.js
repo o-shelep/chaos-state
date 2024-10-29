@@ -1,5 +1,7 @@
 const { merge } = require("webpack-merge");
 const basicConfig = require("./webpack.config");
+const path = require("path");
+
 
 const config = {
     mode: "development",
@@ -41,9 +43,12 @@ const config = {
             },
         ],
     },
+    devtool: "inline-source-map",
     devServer: {
         port: 3000,
         open: true,
+        hot: true,
+        historyApiFallback: true,
     },
 };
 
