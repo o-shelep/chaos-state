@@ -1,11 +1,16 @@
 import React from "react";
-import Header from "../components/Header/Header.jsx";
+
 import Footer from "../components/Footer/Footer.jsx";
+import Header from "../components/Header/Header.jsx";
 import Main from "../components/Main/Main.jsx";
+import useAuthStatus from "../hooks/useAuthStatus.js";
+
 function HomePage() {
+  const isLoggedIn = useAuthStatus();
+
   return (
     <div>
-      <Header/>
+      <Header isLoggedIn={isLoggedIn}/>
       <Main/>
       <Footer/>
     </div>

@@ -1,46 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+
+import useTestLogic from "../../hooks/useTest";
 import styles from "./Test.module.css";
 
 function Test() {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+    const {
+        testData,
+        currentQuestion,
+        currentQuestionIndex,
+        selectedAnswerIndex,
+        handleAnswerSelection,
+        handleNextQuestion,
+        handlePreviousQuestion,
+    } = useTestLogic();
 
-    const testData = {
-        testBlocks: [
-            {
-                question: "What is your favorite color?",
-                answers: ["Red", "Blue", "Green", "Yellow"],
-            },
-            {
-                question: "Which animal do you prefer?",
-                answers: ["Dog", "Cat", "Bird", "Fish"],
-            },
-            {
-                question: "What is your favorite season?",
-                answers: ["Winter", "Spring", "Summer", "Autumn"],
-            },
-        ],
-    };
-
-    const handleAnswerSelection = (index) => {
-        setSelectedAnswerIndex(index);
-    };
-
-    const handleNextQuestion = () => {
-        if (selectedAnswerIndex !== null) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setSelectedAnswerIndex(null);
-        }
-    };
-
-    const handlePreviousQuestion = () => {
-        if (currentQuestionIndex > 0) {
-            setCurrentQuestionIndex(currentQuestionIndex - 1);
-            setSelectedAnswerIndex(null);
-        }
-    };
-
-    const currentQuestion = testData.testBlocks[currentQuestionIndex];
+    if (!testData) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className={styles.testContainer}>
@@ -49,15 +25,15 @@ function Test() {
                     <h1>{currentQuestion.question}</h1>
                 </div>
                 <div className={styles.answers}>
-                    {currentQuestion.answers.map((answer, idx) => (
+                    {currentQuestion.answers.map((answer, index) => (
                         <button
-                            key={idx}
+                            key={index}
                             className={
-                                selectedAnswerIndex === idx
+                                selectedAnswerIndex === index
                                     ? `${styles.answer} ${styles.selected}`
                                     : styles.answer
                             }
-                            onClick={() => handleAnswerSelection(idx)}
+                            onClick={() => handleAnswerSelection(index)}
                         >
                             {answer}
                         </button>
