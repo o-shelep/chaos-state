@@ -4,21 +4,21 @@ import styles from "./Footer.module.css";
 
 function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} data-testid="footer">
       <div className={styles.footerContent}>
-        <div className={styles.logo}>
+        <div className={styles.logo} data-testid="footer-logo">
           <Link to="/">
             <p>
-               c<span className={styles.firstLetter}>h</span>a
+              c<span className={styles.firstLetter}>h</span>a
               <span className={styles.thin}>o</span>
               <span className={styles.lastLetter}>s</span>
             </p>
           </Link>
         </div>
-        <p className={styles.footerRights}>all rights reserved | shelep olha</p>
+        <p className={styles.footerRights} data-testid="footer-rights">all rights reserved | shelep olha</p>
       </div>
 
-      <div className={styles.footerContent}>
+      <div className={styles.footerContent} data-testid="footer-know-more">
         <h4>Know More</h4>
         <ul>
           <li><Link to="tel:0 800 505 201">0 800 505 201 - Гаряча лінія МОЗ</Link></li>
@@ -27,7 +27,7 @@ function Footer() {
         </ul>
       </div>
 
-      <div className={styles.footerContent}>
+      <div className={styles.footerContent} data-testid="footer-get-help">
         <h4>Get Help</h4>
         <ul>
           <li><Link to="https://mindlyspace.com/">Mindly Space</Link></li>

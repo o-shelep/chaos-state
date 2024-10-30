@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import TestImage from "../../../assets/main.jpg";
@@ -29,16 +29,18 @@ function Main() {
   }, []);
 
   return (
-    <div className={styles.mainContainer}>
-      <div className={styles.imageWrapper}>
-        <img src={TestImage} alt="chaos-main-image" />
+    <div className={styles.mainContainer} data-testid="main-container">
+      <div className={styles.imageWrapper} data-testid="main-image-wrapper">
+        <img src={TestImage} alt="chaos-main-image" data-testid="main-image" />
       </div>
-      <div className={styles.titleWrapper}>
+      <div className={styles.titleWrapper} data-testid="main-title-wrapper">
         {isLoggedIn ? (
           <>
-            <h1 className={styles.mainTitle}>Вітаємо, {username || "Guest"}</h1>
-            <div className={styles.descriptionWrapper}>
-              <p className={styles.descriptionText}>
+            <h1 className={styles.mainTitle} data-testid="main-title">
+              Вітаємо, {username || "Guest"}
+            </h1>
+            <div className={styles.descriptionWrapper} data-testid="main-description-wrapper">
+              <p className={styles.descriptionText} data-testid="main-description">
                 Ласкаво просимо до chaos-state! ви можете створити цікавий тест
                 для інших. Просто заповніть деталі свого тесту, включаючи
                 назву, опис, кількість питань і можливі відповіді. пам’ятайте,
@@ -47,8 +49,8 @@ function Main() {
                 коли ви завершите тест, його зможуть спробувати інші. enjoy the
                 chaos!<br />
               </p>
-              <div className={styles.buttonWrapper}>
-                <button className={styles.testButton} onClick={handleCreateTestClick}>
+              <div className={styles.buttonWrapper} data-testid="create-test-button-wrapper">
+                <button className={styles.testButton} onClick={handleCreateTestClick} data-testid="create-test-button">
                   почати
                 </button>
               </div>
@@ -56,9 +58,11 @@ function Main() {
           </>
         ) : (
           <>
-            <h1 className={styles.mainTitle}>Здавалося б все — можна вішатись, але</h1>
-            <div className={styles.descriptionWrapper}>
-              <p className={styles.descriptionText}>
+            <h1 className={styles.mainTitle} data-testid="main-title-logged-out">
+              Здавалося б все — можна вішатись, але
+            </h1>
+            <div className={styles.descriptionWrapper} data-testid="main-description-wrapper-logged-out">
+              <p className={styles.descriptionText} data-testid="main-description-logged-out">
                 Пройдіть короткий тест на визначення типу особистості за
                 Шелеп.<br />
                 Цей тест не є підставою для звернення до психолога і був
@@ -67,8 +71,8 @@ function Main() {
                 проходження тесту для вас відкриється можливість реєстрації з
                 метою подальшого створення таких же тупих тестів.
               </p>
-              <div className={styles.buttonWrapper}>
-                <button className={styles.testButton} onClick={handleTestButtonClick}>
+              <div className={styles.buttonWrapper} data-testid="test-button-wrapper">
+                <button className={styles.testButton} onClick={handleTestButtonClick} data-testid="test-button">
                   тест
                 </button>
               </div>

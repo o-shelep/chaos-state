@@ -38,7 +38,7 @@ const config = {
                 test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)$/i,
                 type: "asset/resource",
                 generator: {
-                    filename: "assets/[hash][ext][query]", // Customize the output folder and file name pattern if needed
+                    filename: "assets/[hash][ext][query]",
                 },
             },
         ],

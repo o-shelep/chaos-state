@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 
 import styles from './Header.module.css';
 
-
 const Header = ({ isLoggedIn }) => {
-
   return (
-    <nav className={styles.nav}>
-      <div className={styles.logoContainer}>
-        <div className={styles.logo}>
+    <nav className={styles.nav} data-testid="header">
+      <div className={styles.logoContainer} data-testid="header-logo-container">
+        <div className={styles.logo} data-testid="header-logo">
           <Link to={"/"}>
             <p>
               c<span className={styles.firstLetter}>h</span>a
@@ -20,26 +18,26 @@ const Header = ({ isLoggedIn }) => {
         </div>
       </div>
 
-      <div className={styles.linksContainer}>
-        <ul className={styles.links}>
+      <div className={styles.linksContainer} data-testid="header-links-container">
+        <ul className={styles.links} data-testid="header-links">
           {isLoggedIn ? (
             <>
-              <li>
+              <li data-testid="create-test-link">
                 <Link to="/create-test">створити тест</Link>
               </li>
-              <li>
+              <li data-testid="more-tests-link">
                 <Link to="/more-tests">більше тестів</Link>
               </li>
-              <li>
+              <li data-testid="my-page-link">
                 <Link to="/me">моя сторінка</Link>
               </li>
             </>
           ) : (
             <>
-              <li>
+              <li data-testid="login-link">
                 <Link to="/auth/register">увійти</Link>
               </li>
-              <li>
+              <li data-testid="test-link">
                 <Link to={`/tests/${process.env.MAIN_TEST_ID}`}>тест</Link>
               </li>
             </>
