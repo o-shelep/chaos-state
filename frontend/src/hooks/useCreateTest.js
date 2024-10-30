@@ -12,6 +12,7 @@ export const useCreateTest = (navigate) => {
     const [results, setResults] = useState([]);
     const [authorId, setAuthorId] = useState(null);
     const [currentStep, setCurrentStep] = useState(1);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -20,6 +21,32 @@ export const useCreateTest = (navigate) => {
             setAuthorId(decodedToken._id);
         }
     }, []);
+
+    const validateStep = () => {
+        const newErrors = {};
+
+        if (currentStep === 1) {
+            if (!testName) newErrors.testName = "Test name is required";
+            if (!description) newErrors.description = "Description is required";
+        } else if (currentStep === 2) {
+            if (numberQuestions <= 0) newErrors.numberQuestions = "Number of questions is required";
+            if (numberResults <= 0) newErrors.numberResults = "Number of results is required";
+        } else if (currentStep > 2 && currentStep <= 2 + numberQuestions) {
+            const questionIndex = currentStep - 3;
+            const question = questions[questionIndex] || {};
+            if (!question.question) newErrors[`question${questionIndex}`] = "Question text is required";
+            if (!question.answer1) newErrors[`answer1_${questionIndex}`] = "Answer 1 is required";
+            if (!question.answer2) newErrors[`answer2_${questionIndex}`] = "Answer 2 is required";
+            if (!question.answer3) newErrors[`answer3_${questionIndex}`] = "Answer 3 is required";
+        } else if (currentStep === 2 + numberQuestions + 1) {
+            results.forEach((result, index) => {
+                if (!result) newErrors[`result${index}`] = `Result ${index + 1} is required`;
+            });
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleTestInfoChange = (e) => {
         const { name, value } = e.target;
@@ -55,11 +82,20 @@ export const useCreateTest = (navigate) => {
         setResults(updatedResults);
     };
 
-    const handleNextStep = () => setCurrentStep((previousStep) => previousStep + 1);
-    const handleBackStep = () => setCurrentStep((previousStep) => previousStep - 1);
+    const handleNextStep = () => {
+        if (validateStep()) {
+            setCurrentStep((prevStep) => prevStep + 1);
+        }
+    };
+
+    const handleBackStep = () => {
+        setCurrentStep((prevStep) => prevStep - 1);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validateStep()) return;
+
         const testData = {
             name: testName,
             description,
@@ -93,6 +129,7 @@ export const useCreateTest = (navigate) => {
         results,
         authorId,
         currentStep,
+        errors,
         handleTestInfoChange,
         handleQuestionInfoChange,
         handleQuestionChange,

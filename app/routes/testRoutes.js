@@ -4,7 +4,6 @@ const { protect } = require("../controllers/authController.js");
 const router = express.Router();
 
 router.get("/more-tests", protect, testController.getAllTestsExcludingMine);
-
 router
   .route("/")
   .post(protect, testController.createTest)

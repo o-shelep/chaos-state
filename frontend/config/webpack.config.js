@@ -1,19 +1,16 @@
 const path = require("node:path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 
 const basicConfig = {
     entry: path.resolve(__dirname, "../src/index.js"),
     output: {
         path: path.resolve(__dirname, "../dist"),
         filename: "bundle.js",
+        publicPath: "/",
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "../public/index.html"),
-        }),
-        new CopyPlugin({
-            patterns: [{ from: path.resolve(__dirname, "../assets"), to: path.resolve(__dirname, "../dist/assets") }],
         }),
     ],
     module: {
@@ -37,14 +34,11 @@ const basicConfig = {
         },
     },
     devServer: {
+        compress: true,
         port: 3000,
         historyApiFallback: true,
         hot: true,
-        client: {
-            webSocketURL: "ws://localhost:3000/ws",
-        },
         allowedHosts: "all",
     },
 };
-
 module.exports = basicConfig;

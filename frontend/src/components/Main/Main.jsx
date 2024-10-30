@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./Main.module.css";
+
 import TestImage from "../../../assets/main.jpg";
+import styles from "./Main.module.css";
 
 function Main() {
   const [username, setUsername] = useState("");
@@ -9,8 +10,7 @@ function Main() {
   const navigate = useNavigate();
 
   const handleTestButtonClick = () => {
-    const testId = "66f586bec76785b1bfc0d33b";
-    navigate(`/tests/${testId}`);
+    navigate(`/tests/${process.env.MAIN_TEST_ID}`);
   };
 
   const handleCreateTestClick = () => {

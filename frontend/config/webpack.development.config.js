@@ -23,6 +23,7 @@ const config = {
                 test: /\.css$/i,
                 use: [
                     "style-loader",
+
                     {
                         loader: "css-loader",
                         options: {
@@ -44,14 +45,17 @@ const config = {
             },
         ],
     },
+    devtool: "inline-source-map",
     devServer: {
         port: 3000,
         open: true,
+        hot: true,
         historyApiFallback: true,
     },
     plugins: [
         new webpack.DefinePlugin({
             "process.env": {
+                MAIN_TEST_ID: JSON.stringify(process.env.MAIN_TEST_ID),
                 REACT_APP_API_URL: JSON.stringify(process.env.REACT_APP_API_URL),
             },
         }),

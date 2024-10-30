@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import styles from './Header.module.css';
 
+
 const Header = ({ isLoggedIn }) => {
 
   return (
@@ -39,7 +40,7 @@ const Header = ({ isLoggedIn }) => {
                 <Link to="/auth/register">увійти</Link>
               </li>
               <li>
-                <Link to="/tests/66f586bec76785b1bfc0d33b">тест</Link>
+                <Link to={`/tests/${process.env.MAIN_TEST_ID}`}>тест</Link>
               </li>
             </>
           )}
