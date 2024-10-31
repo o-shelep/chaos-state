@@ -1,18 +1,20 @@
-const { merge } = require('webpack-merge');
-const basicConfig = require('./webpack.config');
+const { merge } = require("webpack-merge");
+const basicConfig = require("./webpack.config");
+const webpack = require("webpack");
+
 const config = {
-    mode: 'development',
+    mode: "development",
     module: {
         rules: [
             {
                 test: /\.css$/i,
                 use: [
-                    'style-loader',
+                    "style-loader",
                     {
-                        loader: 'css-loader',
+                        loader: "css-loader",
                         options: {
                             modules: {
-                                mode: 'local',
+                                mode: "local",
                                 localIdentName: `[name]_[local]--[hash:base64:5]`,
                                 namedExport: false,
                             },
@@ -24,16 +26,31 @@ const config = {
                 test: /\.jsx?$/,
                 use: [
                     {
-                        loader: 'babel-loader',
+                        loader: "babel-loader",
                         options: {
-                            presets: ['@babel/preset-env', '@babel/preset-react'],
-                            plugins: ['istanbul'],
+                            presets: ["@babel/preset-env", "@babel/preset-react"],
+                            plugins: ["istanbul"],
                         },
                     },
                 ],
             },
+            {
+                test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "assets/[hash][ext][query]",
+                },
+            },
         ],
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            "process.env": {
+                MAIN_TEST_ID: JSON.stringify(process.env.MAIN_TEST_ID),
+                REACT_APP_API_URL: JSON.stringify(process.env.REACT_APP_API_URL),
+            },
+        }),
+    ],
 };
 
 module.exports = merge(basicConfig, config);

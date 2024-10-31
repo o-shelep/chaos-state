@@ -1,68 +1,74 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+import useMoreTests from "../../hooks/useMoreTests";
 import styles from "./MoreTests.module.css";
 
-const TESTS = [
-    { id: "1", name: "Test 1", description: "Description for Test 1" },
-    { id: "2", name: "Test 2", description: "Description for Test 2" },
-    { id: "3", name: "Test 3", description: "Description for Test 3" },
-    { id: "4", name: "Test 4", description: "Description for Test 4" },
-    { id: "5", name: "Test 5", description: "Description for Test 5" },
-    { id: "6", name: "Test 6", description: "Description for Test 6" },
-];
-
-const TESTS_PER_PAGE = 3;
-
 function MoreTests() {
-    const [currentPage, setCurrentPage] = useState(0);
-    const totalPages = Math.ceil(TESTS.length / TESTS_PER_PAGE);
+    const navigate = useNavigate();
+    const {
+        loading,
+        error,
+        currentPage,
+        totalPages,
+        displayedTests,
+        handleNextPage,
+        handlePreviousPage,
+    } = useMoreTests();
 
-    const handleNextPage = () => {
-        if (currentPage < totalPages - 1) {
-            setCurrentPage((prevPage) => prevPage + 1);
-        }
+    const handleTakeTest = (testId) => {
+        navigate(`/tests/${testId}`);
     };
 
-    const handlePrevPage = () => {
-        if (currentPage > 0) {
-            setCurrentPage((prevPage) => prevPage - 1);
-        }
-    };
+    if (loading) {
+        return <div data-testid="loading-message">Loading...</div>;
+    }
 
-    const startIndex = currentPage * TESTS_PER_PAGE;
-    const displayedTests = TESTS.slice(startIndex, startIndex + TESTS_PER_PAGE);
+    if (error) {
+        return <div data-testid="error-message">Error: {error}</div>;
+    }
 
     return (
-        <div className={styles.moreTestsContainer}>
-            <div className={styles.testsRow}>
-                {displayedTests.map(test => (
-                    <div className={styles.testContainer} key={test.id}>
-                        <div className={styles.test}>
-                            <h3 className={styles.testName}>{test.name}</h3>
-                            <p className={styles.testDescription}>{test.description}</p>
-                            <a 
-                                href={`/tests/${test.id}`} 
-                                className={styles.testBtn}
-                            >
-                                Take this test
-                            </a>
-                        </div>
+        <div className={styles.moreTestsContainer} data-testid="more-tests-container">
+            <div className={styles.testsRow} data-testid="tests-row">
+                {displayedTests.map((test, index) => (
+                    <div
+                        className={test ? styles.testContainer : styles.placeholderContainer}
+                        key={test ? test._id : `placeholder-${index}`}
+                        data-testid={test ? `test-container-${test._id}` : `placeholder-container-${index}`}
+                    >
+                        {test ? (
+                            <div className={styles.test} data-testid={`test-${test._id}`}>
+                                <h3 className={styles.testName} data-testid={`test-name-${test._id}`}>{test.name}</h3>
+                                <p className={styles.testDescription} data-testid={`test-description-${test._id}`}>{test.description}</p>
+                                <button
+                                    className={styles.testBtn}
+                                    onClick={() => handleTakeTest(test._id)}
+                                    data-testid={`take-test-button-${test._id}`}
+                                >
+                                    Take this test
+                                </button>
+                            </div>
+                        ) : null}
                     </div>
                 ))}
             </div>
 
-            <div className={styles.paginationControls}>
-                <button 
-                    className={styles.arrowButton} 
-                    onClick={handlePrevPage} 
+            <div className={styles.paginationControls} data-testid="pagination-controls">
+                <button
+                    className={styles.arrowButton}
+                    onClick={handlePreviousPage}
                     disabled={currentPage === 0}
+                    data-testid="previous-button"
                 >
                     &lt; Previous
                 </button>
-                <span className={styles.span}>{currentPage + 1} of {totalPages}</span>
-                <button 
-                    className={styles.arrowButton} 
-                    onClick={handleNextPage} 
+                <span data-testid="pagination-info">{currentPage + 1} of {totalPages}</span>
+                <button
+                    className={styles.arrowButton}
+                    onClick={handleNextPage}
                     disabled={currentPage === totalPages - 1}
+                    data-testid="next-button"
                 >
                     Next &gt;
                 </button>

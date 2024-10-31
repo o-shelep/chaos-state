@@ -1,5 +1,6 @@
-const path = require("path");
+const path = require("node:path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 const basicConfig = {
     entry: path.resolve(__dirname, "../src/index.js"),
     output: {
@@ -35,6 +36,9 @@ const basicConfig = {
     devServer: {
         compress: true,
         port: 3000,
+        historyApiFallback: true,
+        hot: true,
+        allowedHosts: "all",
     },
 };
 module.exports = basicConfig;

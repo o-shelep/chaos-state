@@ -21,7 +21,7 @@ const config = {
                 extensions: [".js", ".jsx"],
             },
             webpack: {
-                config: "./config/webpack.dev.config.js",
+                config: ".frontend/config/webpack.dev.config.js",
             },
         },
     },
@@ -42,6 +42,7 @@ const config = {
         "import/namespace": [2, { allowComputed: true }],
         "import/first": "error",
         "import/newline-after-import": "error",
+        "react/react-in-jsx-scope": "off",
     },
     overrides: [
         {
