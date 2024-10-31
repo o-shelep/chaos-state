@@ -1,8 +1,9 @@
 import React from "react";
-import CreateTest from "./CreateTest";
 import * as reactRouterDom from "react-router-dom"; 
 
-describe("Create Test page", () => {
+import CreateTest from "./CreateTest";
+
+describe("Create Test", () => {
     beforeEach(() => {
         cy.stub(reactRouterDom, "useNavigate").returns(() => {});
         cy.mount(

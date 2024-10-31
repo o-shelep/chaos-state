@@ -1,5 +1,6 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
+
 import Footer from "./Footer";
 
 describe("Footer Component", () => {

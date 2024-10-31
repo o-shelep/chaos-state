@@ -18,7 +18,7 @@ describe("Header Component", () => {
 
     it("should display the logo", () => {
         cy.get('[data-testid="header-logo"]').should('exist');
-        cy.get('[data-testid="header-logo"]').contains('chaos'); // check if text includes 'chaos'
+        cy.get('[data-testid="header-logo"]').contains('chaos'); 
     });
 
     it("should show login link when user is not logged in", () => {
